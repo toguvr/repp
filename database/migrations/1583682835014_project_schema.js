@@ -8,7 +8,14 @@ class ProjectSchema extends Schema {
     this.create('projects', (table) => {
       table.increments()
       table
-        .integer('user_id')
+        .integer('owner')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onUpdate('CASCADE')
+        .onDelete('SET NULL')
+      table
+        .integer('members')
         .unsigned()
         .references('id')
         .inTable('users')
@@ -16,6 +23,7 @@ class ProjectSchema extends Schema {
         .onDelete('SET NULL')
       table.string('title').notNullable()
       table.text('description').notNullable()
+      table.boolean('premmium').notNullable()
       table.timestamps()
     })
   }

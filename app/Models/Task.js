@@ -15,7 +15,11 @@ class Task extends Model {
     return this.belongsTo('App/Models/Project')
   }
 
-  user () {
+  payer () {
+    return this.belongsTo('App/Models/User')
+  }
+
+  receiver () {
     return this.belongsTo('App/Models/User')
   }
 
