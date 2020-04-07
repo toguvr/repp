@@ -1,18 +1,20 @@
 'use strict'
 
 const Project = use('App/Models/Project')
+const ProjectUser = use('App/Models/ProjectUser')
 
 class ProjectController {
   async index ({ request, response, view }) {
     const { page } = request.get()
-    const projects = await Project.query().with('owner').paginate(page)
+    const projects = await Project.query().with('owner').with('members', builder => { builder.with('user') }).paginate(page)
     return projects
   }
 
   async store ({ request, response, auth }) {
     const data = request.only(['title', 'description'])
 
-    const project = await Project.create({ ...data, owner: auth.user.id })
+    const project = await Project.create({ ...data, owner_id: auth.user.id, premium: false })
+    await ProjectUser.create({ user_id: auth.user.id, project_id: project.id })
 
     return project
   }
@@ -28,7 +30,7 @@ class ProjectController {
 
   async update ({ params, request, response }) {
     const project = await Project.findOrFail(params.id)
-    const data = request.only(['title', 'description'])
+    const data = request.only(['title', 'description', 'members'])
 
     project.merge(data)
 

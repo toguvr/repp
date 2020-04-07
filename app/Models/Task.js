@@ -16,11 +16,11 @@ class Task extends Model {
   }
 
   payer () {
-    return this.belongsTo('App/Models/User')
+    return this.belongsTo('App/Models/User', 'payer_id', 'id')
   }
 
   receiver () {
-    return this.belongsTo('App/Models/User')
+    return this.belongsTo('App/Models/User', 'receiver_id', 'id')
   }
 
   file () {

@@ -14,12 +14,12 @@ class User extends Model {
     })
   }
 
-  addresses () {
-    return this.hasMany('App/Models/UserAddress')
-  }
-
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  isMember () {
+    return this.belongsToMany('App/Models/Project')
   }
 
   projects () {
@@ -28,6 +28,14 @@ class User extends Model {
 
   tasks () {
     return this.hasMany('App/Models/Task')
+  }
+
+  payer () {
+    return this.hasOne('App/Models/Task')
+  }
+
+  receiver () {
+    return this.hasOne('App/Models/Task')
   }
 }
 

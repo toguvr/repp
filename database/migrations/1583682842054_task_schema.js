@@ -16,19 +16,19 @@ class TaskSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table
-        .integer('payer')
+        .integer('payer_id')
         .unsigned()
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table
-        .integer('receiver')
+        .integer('receiver_id')
         .unsigned()
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE')
+        .onDelete('SET NULL')
       table
         .integer('file_id')
         .unsigned()

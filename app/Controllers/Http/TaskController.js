@@ -4,21 +4,24 @@ const Task = use('App/Models/Task')
 
 class TaskController {
   async index ({ params, request, response, view }) {
-    const tasks = await Task.query().where('project_id', params.projects_id).with('user').fetch()
+    const tasks = await Task.query().where('project_id', params.projects_id).with('payer').with('receiver').with('project').fetch()
 
     return tasks
   }
 
-  async store ({ params, request, response }) {
+  async store ({ params, request, auth }) {
     const data = request.only([
-      'user_id',
+      'project_id',
+      'receiver_id',
       'title',
+      'amount',
+      'value',
       'description',
       'due_date',
       'file_id'
     ])
 
-    const task = await Task.create({ ...data, project_id: params.projects_id })
+    const task = await Task.create({ ...data, project_id: params.projects_id, payer_id: auth.user.id })
 
     return task
   }

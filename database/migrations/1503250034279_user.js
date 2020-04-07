@@ -11,13 +11,6 @@ class UserSchema extends Schema {
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.string('token')
-      table
-        .integer('file_id')
-        .unsigned()
-        .references('id')
-        .inTable('files')
-        .onUpdate('CASCADE')
-        .onDelete('SET NULL')
       table.timestamp('token_created_at')
       table.timestamps()
     })

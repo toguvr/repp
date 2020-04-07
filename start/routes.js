@@ -13,6 +13,8 @@ Route.get('/files/:id', 'FileController.show')
 
 Route.group(() => {
   Route.post('/files', 'FileController.store')
+  Route.get('/members', 'ProjectUserController.show')
+  Route.post('/members', 'ProjectUserController.store')
 
   Route.resource('projects', 'ProjectController')
     .apiOnly()
