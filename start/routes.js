@@ -16,6 +16,7 @@ Route.group(() => {
   Route.put('users', 'UserController.update')
   Route.post('/files', 'FileController.store')
   Route.get('/members', 'ProjectUserController.show')
+  Route.get('/projectmembers/:id', 'ProjectUserController.index')
   Route.post('/members/:projects_id', 'ProjectUserController.store')
 
   Route.resource('projects', 'ProjectController')

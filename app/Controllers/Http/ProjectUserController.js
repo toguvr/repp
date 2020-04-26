@@ -14,6 +14,17 @@ class ProjectUserController {
     return projects
   }
 
+  async index ({ params }) {
+    const projects = await ProjectUser
+      .query()
+      .with('projects')
+      .with('user')
+      .where('project_id', params.id)
+      .fetch()
+
+    return projects
+  }
+
   async store ({ request, response, params, auth }) {
     const data = request.only(['title', 'description'])
 
