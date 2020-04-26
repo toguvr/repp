@@ -12,9 +12,11 @@ Route.put('password', 'ForgotPasswordController.update').validator('ResetPasswor
 Route.get('/files/:id', 'FileController.show')
 
 Route.group(() => {
+  Route.get('users', 'UserController.show')
+  Route.put('users', 'UserController.update')
   Route.post('/files', 'FileController.store')
   Route.get('/members', 'ProjectUserController.show')
-  Route.post('/members', 'ProjectUserController.store')
+  Route.post('/members/:projects_id', 'ProjectUserController.store')
 
   Route.resource('projects', 'ProjectController')
     .apiOnly()
