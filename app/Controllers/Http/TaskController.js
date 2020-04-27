@@ -53,8 +53,11 @@ class TaskController {
     const task = await Task.findOrFail(params.id)
 
     const data = request.only([
-      'user_id',
+      'project_id',
+      'receiver_id',
       'title',
+      'amount',
+      'value',
       'description',
       'due_date',
       'file_id'
