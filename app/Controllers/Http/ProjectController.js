@@ -11,7 +11,7 @@ class ProjectController {
   }
 
   async store ({ request, response, auth }) {
-    const data = request.only(['title', 'description'])
+    const data = request.only(['title', 'description', 'set_date'])
 
     const project = await Project.create({ ...data, owner_id: auth.user.id, premium: false })
     await ProjectUser.create({ user_id: auth.user.id, project_id: project.id })
@@ -30,7 +30,7 @@ class ProjectController {
 
   async update ({ params, request, response }) {
     const project = await Project.findOrFail(params.id)
-    const data = request.only(['title', 'description', 'members', 'totalValue'])
+    const data = request.only(['title', 'description', 'members', 'set_date', 'totalValue'])
 
     project.merge(data)
 
