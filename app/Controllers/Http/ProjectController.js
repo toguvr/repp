@@ -30,7 +30,7 @@ class ProjectController {
 
   async update ({ params, request, response }) {
     const project = await Project.findOrFail(params.id)
-    const data = request.only(['title', 'description', 'members'])
+    const data = request.only(['title', 'description', 'members', 'totalValue'])
 
     project.merge(data)
 
