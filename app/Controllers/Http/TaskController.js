@@ -18,7 +18,8 @@ class TaskController {
       'value',
       'description',
       'due_date',
-      'file_id'
+      'file_id',
+      'set_date'
     ])
 
     const task = await Task.create({ ...data, project_id: params.projects_id, payer_id: auth.user.id })
@@ -60,7 +61,8 @@ class TaskController {
       'value',
       'description',
       'due_date',
-      'file_id'
+      'file_id',
+      'set_date'
     ])
 
     task.merge(data)
